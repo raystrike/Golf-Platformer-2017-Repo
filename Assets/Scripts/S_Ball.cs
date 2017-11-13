@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class S_Ball : MonoBehaviour {
@@ -9,6 +10,11 @@ public class S_Ball : MonoBehaviour {
     public Rigidbody2D rb;
 	public Vector2 velocity;
     public bool MidShot = false;
+    public bool Clubswitcher;
+
+    public GameObject ClubIcon;
+    public Sprite Putter;
+    public Sprite Club;
 
 	// Use this for initialization
 	void Start () 
@@ -45,7 +51,25 @@ public class S_Ball : MonoBehaviour {
             MidShot = true;
         }
 
-		if (rb.velocity == new Vector2(0, 0))
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Clubswitcher == false)//Switch to Putter
+            {
+                thrust = 5;
+                print("Putter Selected");
+                ClubIcon.GetComponent<Image>().sprite = Putter;
+                Clubswitcher = true;
+            }
+            else if (Clubswitcher == true)//Switch to Driver
+            {
+                thrust = 15;
+                print("Driver Selected");
+                ClubIcon.GetComponent<Image>().sprite = Club;
+                Clubswitcher = false;
+            }
+        }
+
+        if (rb.velocity == new Vector2(0, 0))
 		{
 			MidShot = false;
 		}
