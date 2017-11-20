@@ -74,4 +74,12 @@ public class S_Ball : MonoBehaviour {
 			MidShot = false;
 		}
 	}
+
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		if (other.tag == "Slower") 
+		{
+			rb.velocity = Vector3.zero;
+		}
+	}
 }
