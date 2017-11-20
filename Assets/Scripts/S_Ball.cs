@@ -16,6 +16,8 @@ public class S_Ball : MonoBehaviour {
     public Sprite Putter;
     public Sprite Club;
 
+    public float Offset = 90f;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -30,11 +32,10 @@ public class S_Ball : MonoBehaviour {
         //rb.velocity = thrust * transform.up;
 		velocity = rb.velocity;
 
-        var mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
-        Quaternion rot = Quaternion.LookRotation(transform.position - mousePosition, Vector3.forward);
-        transform.rotation = rot;
-
-        transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
+        Vector3 differance = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        differance.Normalize();
+        float rotation_z = Mathf.Atan2(differance.y, differance.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rotation_z + Offset);
 
         if (MidShot == false)
         {
