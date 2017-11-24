@@ -8,6 +8,7 @@ TagManager:
   - BorderR
   - Slower
   - Magma
+  - BorderB
   layers:
   - Default
   - TransparentFX

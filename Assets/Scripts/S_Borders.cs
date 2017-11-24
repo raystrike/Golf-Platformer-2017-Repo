@@ -17,6 +17,6 @@ public class S_Borders : MonoBehaviour
 	void Update ()
 	{
 		myHeight = screenHeight / 10;
-		this.transform.localScale = new Vector3(1, myHeight, 0); // eventually change to scale to levelHeight as some levels will be taller than screen
+		this.transform.localScale = new Vector3(1, myHeight, 0); 
 	}
 }

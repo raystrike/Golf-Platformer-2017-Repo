@@ -18,6 +18,8 @@ public class S_Ball : MonoBehaviour {
 
     public float Offset = 90f;
 
+	public int shotCount;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -50,6 +52,7 @@ public class S_Ball : MonoBehaviour {
         {
             rb.velocity = thrust * transform.up;
             MidShot = true;
+			shotCount++;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -74,6 +77,11 @@ public class S_Ball : MonoBehaviour {
 		{
 			MidShot = false;
 		}
+
+		// check for collision with bottom border and if colliding then game over
+
+
+
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
