@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4295411001420232}
   m_Layer: 0
-  m_Name: Tiny Piece
+  m_Name: Tiny Piece G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
