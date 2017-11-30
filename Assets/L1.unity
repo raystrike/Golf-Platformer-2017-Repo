@@ -733,7 +733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &179209356
 Transform:
   m_ObjectHideFlags: 0
@@ -3481,6 +3481,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5789149, y: 0.6750672}
   m_EdgeRadius: 0
+--- !u!114 &910045428 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114354496648814068, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+    type: 2}
+  m_PrefabInternal: {fileID: 1813081583}
+  m_Script: {fileID: 11500000, guid: 5a0c2e160f0cafa4590946c4a2ea259d, type: 3}
 --- !u!1 &914756028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3867,7 +3873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &954911062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4538,7 +4544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1166899091
 Transform:
   m_ObjectHideFlags: 0
@@ -6011,7 +6017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1747663409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6034,6 +6040,7 @@ MonoBehaviour:
   Club: {fileID: 21300000, guid: 314c70b8169d4ce4aa085782d4a0c579, type: 3}
   Offset: -90
   shotCount: 0
+  isDead: 0
 --- !u!50 &1747663410
 Rigidbody2D:
   serializedVersion: 4
@@ -6563,36 +6570,136 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114271312947968952, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+    - target: {fileID: 114354496648814068, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
         type: 2}
       propertyPath: HUD
       value: 
       objectReference: {fileID: 954911061}
-    - target: {fileID: 114271312947968952, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+    - target: {fileID: 114354496648814068, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
         type: 2}
       propertyPath: ball
       value: 
       objectReference: {fileID: 1747663408}
-    - target: {fileID: 114271312947968952, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+    - target: {fileID: 114354496648814068, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
         type: 2}
       propertyPath: borders
       value: 
       objectReference: {fileID: 1166899090}
-    - target: {fileID: 114271312947968952, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+    - target: {fileID: 114354496648814068, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
         type: 2}
       propertyPath: grassLevel
       value: 
-      objectReference: {fileID: 179209355}
-    - target: {fileID: 114271312947968952, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+      objectReference: {fileID: 1006827998}
+    - target: {fileID: 114354496648814068, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
         type: 2}
       propertyPath: volcanoLevel
       value: 
       objectReference: {fileID: 59204372}
-    - target: {fileID: 114271312947968952, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+    - target: {fileID: 114354496648814068, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
         type: 2}
       propertyPath: spaceLevel
       value: 
       objectReference: {fileID: 526877939}
+    - target: {fileID: 114354496648814068, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: levelCompletePopup
+      value: 
+      objectReference: {fileID: 605948072}
+    - target: {fileID: 114354496648814068, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: gameOverPopup
+      value: 
+      objectReference: {fileID: 2118318980}
+    - target: {fileID: 114654013495838850, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 910045428}
+    - target: {fileID: 114406187305327544, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 910045428}
+    - target: {fileID: 114270686773208960, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 910045428}
+    - target: {fileID: 114719507141917970, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 910045428}
+    - target: {fileID: 114841590784939540, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 910045428}
+    - target: {fileID: 114779016950484280, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 910045428}
+    - target: {fileID: 114919090420381638, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 910045428}
+    - target: {fileID: 114754196368635510, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 910045428}
+    - target: {fileID: 114212968001603476, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 910045428}
+    - target: {fileID: 114719507141917970, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LevelSelectButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 114919090420381638, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LeaderboardsButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 114754196368635510, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CreditsButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 114212968001603476, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GrassLevel1Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 114654013495838850, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VolcanoLevel1Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 114841590784939540, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpaceLevel1Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 114406187305327544, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 114779016950484280, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 114270686773208960, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ddf3c4d7a814cd4cbeb8fcc4e989c21, type: 2}
   m_IsPrefabParent: 0

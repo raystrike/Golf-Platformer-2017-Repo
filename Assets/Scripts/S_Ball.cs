@@ -20,6 +20,8 @@ public class S_Ball : MonoBehaviour {
 
 	public int shotCount;
 
+	public bool isDead = false;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -89,6 +91,11 @@ public class S_Ball : MonoBehaviour {
 		if (other.tag == "Slower") 
 		{
 			rb.velocity = Vector3.zero;
+		}
+
+		if (other.tag == "Magma")
+		{
+			isDead = true;
 		}
 	}
 }

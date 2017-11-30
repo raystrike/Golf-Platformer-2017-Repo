@@ -18,6 +18,11 @@ public class S_UI : MonoBehaviour
 	public GameObject volcanoLevel;
 	public GameObject spaceLevel;
 
+	string currentLevel;
+
+	public GameObject levelCompletePopup;
+	public GameObject gameOverPopup;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -38,7 +43,13 @@ public class S_UI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		// check if ball is dead
+		if (ball.GetComponent<S_Ball> ().isDead == true)
+		{
+			// if player is dead
+			Time.timeScale = 0.0f;
+			gameOverPopup.SetActive (true);
+		}
 	}
 
 	public void LevelSelectButton()
@@ -119,6 +130,8 @@ public class S_UI : MonoBehaviour
 		grassLevel.SetActive (true);
 		volcanoLevel.SetActive (false);
 		spaceLevel.SetActive (false);
+
+		currentLevel = "GrassLevel";
 	}
 
 	public void VolcanoLevel1Button()
@@ -135,6 +148,8 @@ public class S_UI : MonoBehaviour
 		grassLevel.SetActive (false);
 		volcanoLevel.SetActive (true);
 		spaceLevel.SetActive (false);
+
+		currentLevel = "VolcanoLevel";
 	}
 
 	public void SpaceLevel1Button()
@@ -151,6 +166,20 @@ public class S_UI : MonoBehaviour
 		grassLevel.SetActive (false);
 		volcanoLevel.SetActive (false);
 		spaceLevel.SetActive (true);
+
+		currentLevel = "SpaceLevel";
+	}
+
+	public void ReplayLevelButton()
+	{
+		// if grass level
+		// reset ball and camera to original position
+
+		// if volcano level
+		// reset ball, camera and magma to original position
+
+		// if space level
+		// reset ball, camera and O2 tanks to original position
 	}
 
 }
