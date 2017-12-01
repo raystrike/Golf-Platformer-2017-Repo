@@ -23,9 +23,17 @@ public class S_UI : MonoBehaviour
 	public GameObject levelCompletePopup;
 	public GameObject gameOverPopup;
 
+	private Vector3 ballStartPosition;
+	private Vector3 magmaStartPosition;
+
+	public GameObject magma;
+
 	// Use this for initialization
 	void Start ()
 	{
+		magmaStartPosition = magma.transform.position;
+		ballStartPosition = ball.transform.position;
+
 		startScreen.SetActive (true);
 		levelSelectScreen.SetActive (false);
 		leaderboardsScreen.SetActive (false);
@@ -38,6 +46,9 @@ public class S_UI : MonoBehaviour
 		grassLevel.SetActive (false);
 		volcanoLevel.SetActive (false);
 		spaceLevel.SetActive (false);
+
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -47,8 +58,7 @@ public class S_UI : MonoBehaviour
 		if (ball.GetComponent<S_Ball> ().isDead == true)
 		{
 			// if player is dead
-			Time.timeScale = 0.0f;
-			gameOverPopup.SetActive (true);
+			ShowGameOverPopup();
 		}
 	}
 
@@ -66,6 +76,9 @@ public class S_UI : MonoBehaviour
 		grassLevel.SetActive (false);
 		volcanoLevel.SetActive (false);
 		spaceLevel.SetActive (false);
+
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
 	}
 
 	public void LeaderboardsButton()
@@ -82,6 +95,9 @@ public class S_UI : MonoBehaviour
 		grassLevel.SetActive (false);
 		volcanoLevel.SetActive (false);
 		spaceLevel.SetActive (false);
+
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
 	}
 
 	public void CreditsButton()
@@ -98,6 +114,9 @@ public class S_UI : MonoBehaviour
 		grassLevel.SetActive (false);
 		volcanoLevel.SetActive (false);
 		spaceLevel.SetActive (false);
+
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
 	}
 
 	public void ReturnButton()
@@ -114,6 +133,9 @@ public class S_UI : MonoBehaviour
 		grassLevel.SetActive (false);
 		volcanoLevel.SetActive (false);
 		spaceLevel.SetActive (false);
+
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
 	}
 
 	public void GrassLevel1Button()
@@ -130,6 +152,9 @@ public class S_UI : MonoBehaviour
 		grassLevel.SetActive (true);
 		volcanoLevel.SetActive (false);
 		spaceLevel.SetActive (false);
+
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
 
 		currentLevel = "GrassLevel";
 	}
@@ -149,6 +174,9 @@ public class S_UI : MonoBehaviour
 		volcanoLevel.SetActive (true);
 		spaceLevel.SetActive (false);
 
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
+
 		currentLevel = "VolcanoLevel";
 	}
 
@@ -167,19 +195,63 @@ public class S_UI : MonoBehaviour
 		volcanoLevel.SetActive (false);
 		spaceLevel.SetActive (true);
 
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
+
 		currentLevel = "SpaceLevel";
+	}
+
+	void ShowGameOverPopup()
+	{
+		Time.timeScale = 0.0f;
+
+		HUD.SetActive (false);
+
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (true);
 	}
 
 	public void ReplayLevelButton()
 	{
+		Time.timeScale = 1.0f;
+		ball.GetComponent<S_Ball> ().isDead = false;
+
 		// if grass level
 		// reset ball and camera to original position
+		if (currentLevel == "GrassLevel")
+		{
+			GrassLevel1Button ();
+			ResetBallPosition ();
+		}
+
 
 		// if volcano level
 		// reset ball, camera and magma to original position
+		if (currentLevel == "VolcanoLevel")
+		{
+			VolcanoLevel1Button ();
+			ResetMagmaPosition ();
+			ResetBallPosition ();
+		}
 
 		// if space level
 		// reset ball, camera and O2 tanks to original position
+		if (currentLevel == "SpaceLevel")
+		{
+			SpaceLevel1Button ();
+			ResetBallPosition ();
+			//ResetO2Position ();
+		}
+	}
+
+	void ResetBallPosition()
+	{
+		ball.transform.position = ballStartPosition;
+	}
+
+	void ResetMagmaPosition()
+	{
+		magma.transform.position = magmaStartPosition;
 	}
 
 }
