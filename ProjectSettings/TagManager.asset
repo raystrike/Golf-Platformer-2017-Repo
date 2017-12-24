@@ -9,6 +9,7 @@ TagManager:
   - Slower
   - Magma
   - BorderB
+  - ScoreTable
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,11 @@ public class S_ShotCount : MonoBehaviour
 {
 
 	public int currentShots;
+    public int currentScore;
 	public Text shotCountText;
+    public Text scoreText;
+
+	public S_Database database;
 
 	// Use this for initialization
 	void Start ()
@@ -19,7 +23,17 @@ public class S_ShotCount : MonoBehaviour
 	void Update ()
 	{
 		currentShots = GameObject.Find ("Ball").GetComponent<S_Ball> ().shotCount;
+        currentScore = 1000 - (currentShots * 35);
+        if (currentScore <= 0)
+        {
+            currentScore = 0;
+        }
 
-		shotCountText.text = ("Shots: " + currentShots);
+		database.Shotcount = currentShots;
+		database.Scorecount = currentScore;
+       
+
+        scoreText.text = ("Score: " + currentScore);
+        shotCountText.text = ("Shots: " + currentShots);
 	}
 }

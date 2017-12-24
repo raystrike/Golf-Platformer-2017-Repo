@@ -20,6 +20,11 @@ public class S_UI : MonoBehaviour
 
 	string currentLevel;
 
+	public S_Database database;
+
+	public GameObject ScoreboardText;
+	public GameObject Scoreboard;
+
 	public GameObject levelCompletePopup;
 	public GameObject gameOverPopup;
 
@@ -60,6 +65,24 @@ public class S_UI : MonoBehaviour
 			// if player is dead
 			ShowGameOverPopup();
 		}
+
+		database.Level = currentLevel;
+	}
+
+	//Takes string collected in "S_Database" and splits it into an array which is then printed in a grid table
+	public void PrintScoreboard (string URLOutput)
+	{
+		Scoreboard = GameObject.FindWithTag ("ScoreTable").gameObject;
+
+		string[] array = URLOutput.Split ('\t', '\n');
+
+		for(int i = 0; i < array.Length; i++)
+		{
+            GameObject _textBox = Instantiate(ScoreboardText, transform.position, transform.rotation);
+            _textBox.transform.parent = Scoreboard.transform;
+			_textBox.GetComponent<Text> ().text = array [i];
+        }
+			
 	}
 
 	public void LevelSelectButton()
