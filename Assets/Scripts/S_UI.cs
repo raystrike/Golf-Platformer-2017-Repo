@@ -37,7 +37,7 @@ public class S_UI : MonoBehaviour
 
 	void Awake()
 	{
-		Advertisement.Initialize ("1657903");
+		//Advertisement.Initialize ("1657903");
 
 	}
 

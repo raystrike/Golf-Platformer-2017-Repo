@@ -43,10 +43,6 @@ public class S_Ball : MonoBehaviour
         //rb.velocity = thrust * transform.up;
 		velocity = rb.velocity;
 
-        Vector3 differance = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        differance.Normalize();
-        float rotation_z = Mathf.Atan2(differance.y, differance.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rotation_z + Offset);
 
         if (MidShot == false)
         {
@@ -57,13 +53,56 @@ public class S_Ball : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(false);
         }
 
-        if (Input.GetMouseButtonDown(0) && MidShot == false)
+        //PC & Mobile Controls by Ray Sloan
+        //PC Controls
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
-            rb.velocity = thrust * transform.up;
-            MidShot = true;
-			shotCount++;
+            //Rotate Ball in direction of mouse pointer
+            Vector3 differance = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            differance.Normalize();
+            float rotation_z = Mathf.Atan2(differance.y, differance.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, rotation_z + Offset);
+
+            //Mouse Click launches ball
+            if (Input.GetMouseButtonDown(0) && MidShot == false)
+            {
+                rb.velocity = thrust * transform.up;
+                MidShot = true;
+                shotCount++;
+            }
+
+        }
+        //Mobile Controls
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+
+            //Touch Release launches ball
+            if ( MidShot == false)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    //Rotate Ball in direction of touch position
+                    var touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, Camera.main.nearClipPlane));
+                    Quaternion rot = Quaternion.LookRotation(transform.position - touchPosition, Vector3.forward);
+                    transform.rotation = rot;
+
+                    transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
+
+
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    rb.velocity = thrust * transform.up;
+                    MidShot = true;
+                    shotCount++;
+                }
+
+            }
+
         }
 
+        //Club Switching By Ray Sloan
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (Clubswitcher == false)//Switch to Putter
@@ -105,6 +144,7 @@ public class S_Ball : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
+        //Slower By Ray Sloan
 		if (other.tag == "Slower") 
 		{
 			rb.velocity = Vector3.zero;
