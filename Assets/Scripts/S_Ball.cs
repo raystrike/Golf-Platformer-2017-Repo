@@ -7,10 +7,13 @@ public class S_Ball : MonoBehaviour {
 
     public float thrust;
     public float fallOffMultiplier;
+	public float lastY; // james input
     public Rigidbody2D rb;
+	// public Collider2D C; // James input
 	public Vector2 velocity;
     public bool MidShot = false;
     public bool Clubswitcher;
+	// public bool isBounced; // james input
 
     public GameObject ClubIcon;
     public Sprite Putter;
@@ -25,7 +28,9 @@ public class S_Ball : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        rb = GetComponent<Rigidbody2D>();	
+        rb = GetComponent<Rigidbody2D>();
+
+		//C = GetComponent<Collider2D>(); // James input
 	}
 	
 	// Update is called once per frame
@@ -80,10 +85,20 @@ public class S_Ball : MonoBehaviour {
 			MidShot = false;
 		}
 
-		// check for collision with bottom border and if colliding then game over
+		// check for collision with bottom border and if colliding then game over 
 
+	}
 
-
+	void FixedUpdate ()
+	{
+		if (lastY > transform.position.y) 
+		{
+			gameObject.layer = 0;
+		}
+		else
+		{
+			lastY = transform.position.y;
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
@@ -97,5 +112,24 @@ public class S_Ball : MonoBehaviour {
 		{
 			isDead = true;
 		}
+
+		if (other.tag == "Tramp") // outcome of of ball colliding with "Tramp" prefab, tagged as "Tramp" 
+		{
+
+			// C.enabled = false; // turns off colission of the ball.
+
+			gameObject.layer = 9; // changes to layer 9, layer "ball".
+
+			rb.AddForce(new Vector2(0,1000)); // vertical velosity
+
+			lastY = transform.position.y; // getting posistion of y.
+
+			// isBounced = true; 
+		}
+		if (other.tag == "PortIN") 
+		{
+			
+		}
+
 	}
 }

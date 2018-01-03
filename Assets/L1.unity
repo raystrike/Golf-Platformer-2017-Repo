@@ -6454,7 +6454,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4832034417602664, guid: c19a3af533eec0345ab3487ca7400822, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.68
+      value: 1.56
       objectReference: {fileID: 0}
     - target: {fileID: 4832034417602664, guid: c19a3af533eec0345ab3487ca7400822, type: 2}
       propertyPath: m_LocalPosition.y
@@ -8106,7 +8106,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4508240337466624, guid: 31961740fdb508e419dc3b3067899b52, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.38
+      value: 1.773
       objectReference: {fileID: 0}
     - target: {fileID: 4508240337466624, guid: 31961740fdb508e419dc3b3067899b52, type: 2}
       propertyPath: m_LocalPosition.y
@@ -8172,6 +8172,10 @@ Prefab:
         type: 2}
       propertyPath: m_Size.y
       value: 0.23948336
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569207371997384, guid: 31961740fdb508e419dc3b3067899b52, type: 2}
+      propertyPath: m_TagString
+      value: Tramp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 31961740fdb508e419dc3b3067899b52, type: 2}
@@ -8712,7 +8716,7 @@ GameObject:
   - component: {fileID: 1551664260}
   - component: {fileID: 1551664259}
   - component: {fileID: 1551664262}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Border Left
   m_TagString: BorderL
   m_Icon: {fileID: 0}
@@ -9637,7 +9641,7 @@ GameObject:
   - component: {fileID: 1747663411}
   - component: {fileID: 1747663410}
   - component: {fileID: 1747663409}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9657,10 +9661,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 15
   fallOffMultiplier: 5
+  lastY: 0
   rb: {fileID: 0}
   velocity: {x: 0, y: 0}
   MidShot: 0
   Clubswitcher: 0
+  isBounced: 0
   ClubIcon: {fileID: 950166561}
   Putter: {fileID: 21300000, guid: c1c53c6097254824588b5baadaa09638, type: 3}
   Club: {fileID: 21300000, guid: 314c70b8169d4ce4aa085782d4a0c579, type: 3}
@@ -11135,7 +11141,7 @@ GameObject:
   - component: {fileID: 1943444573}
   - component: {fileID: 1943444572}
   - component: {fileID: 1943444571}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Border Right
   m_TagString: BorderR
   m_Icon: {fileID: 0}
