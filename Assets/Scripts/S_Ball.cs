@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class S_Ball : MonoBehaviour {
+public class S_Ball : MonoBehaviour
+{
 
     public float thrust;
     public float fallOffMultiplier;
@@ -24,6 +25,7 @@ public class S_Ball : MonoBehaviour {
 	public int shotCount;
 
 	public bool isDead = false;
+	public bool levelComplete;
 
 	// Use this for initialization
 	void Start () 
@@ -129,6 +131,11 @@ public class S_Ball : MonoBehaviour {
 		if (other.tag == "PortIN") 
 		{
 			
+		}
+
+		if (other.tag == "Hole")
+		{
+			levelComplete = true;
 		}
 
 	}

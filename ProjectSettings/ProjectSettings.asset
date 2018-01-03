@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 12
   productGUID: 2542cd59f99bdfe44a9b7e9d36cfff28
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 0
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -144,7 +144,7 @@ PlayerSettings:
     Android: com.MA.GolfPlatformer
   buildNumber: {}
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 16
+  AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -591,9 +591,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 651c13a5-6999-4026-bfe9-f683815f197e
-  projectName: Mobile Golf Platformer 2017
-  organizationId: ray-2893127
+  cloudProjectId: 1e90a7dd-e234-406a-8875-41d27f458143
+  projectName: GolfPlatformer1
+  organizationId: splatkins
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

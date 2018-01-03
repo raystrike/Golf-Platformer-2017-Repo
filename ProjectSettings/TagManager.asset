@@ -11,6 +11,7 @@ TagManager:
   - BorderB
   - ScoreTable
   - Tramp
+  - Hole
   layers:
   - Default
   - TransparentFX

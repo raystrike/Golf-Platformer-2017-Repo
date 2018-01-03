@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
 public class S_UI : MonoBehaviour
 {
@@ -32,6 +33,13 @@ public class S_UI : MonoBehaviour
 	private Vector3 magmaStartPosition;
 
 	public GameObject magma;
+
+
+	void Awake()
+	{
+		Advertisement.Initialize ("1657903");
+
+	}
 
 	// Use this for initialization
 	void Start ()
@@ -66,6 +74,10 @@ public class S_UI : MonoBehaviour
 			ShowGameOverPopup();
 		}
 
+		if (ball.GetComponent<S_Ball> ().levelComplete == true)
+		{
+			ShowLevelCompletePopup ();
+		}
 		database.Level = currentLevel;
 	}
 
@@ -87,6 +99,9 @@ public class S_UI : MonoBehaviour
 
 	public void LevelSelectButton()
 	{
+		
+	//	Debug.Log ();
+
 		startScreen.SetActive (false);
 		levelSelectScreen.SetActive (true);
 		leaderboardsScreen.SetActive (false);
@@ -226,6 +241,8 @@ public class S_UI : MonoBehaviour
 
 	void ShowGameOverPopup()
 	{
+		ShowAdvert ();
+
 		Time.timeScale = 0.0f;
 
 		HUD.SetActive (false);
@@ -277,4 +294,33 @@ public class S_UI : MonoBehaviour
 		magma.transform.position = magmaStartPosition;
 	}
 
+	public void ExitGame()
+	{
+		Application.Quit ();
+	}
+
+	public void ExitToMain()
+	{
+		Invoke ("Start", 0.1f);
+	}
+
+	public void ShowLevelCompletePopup()
+	{
+		//ShowAdvert ();
+
+		Time.timeScale = 0.0f;
+
+		HUD.SetActive (false);
+
+		levelCompletePopup.SetActive (true);
+		gameOverPopup.SetActive (false);
+	}
+
+	void ShowAdvert()
+	{
+		if (Advertisement.IsReady() == true)
+		{
+			Advertisement.Show ("video");
+		}
+	}
 }
