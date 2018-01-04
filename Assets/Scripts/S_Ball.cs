@@ -152,7 +152,7 @@ public class S_Ball : MonoBehaviour
 			rb.velocity = Vector3.zero;
 		}
 
-		if (other.tag == "Magma")
+		if (other.tag == "Magma" || other.tag == "Hazard")
 		{
 			isDead = true;
 		}

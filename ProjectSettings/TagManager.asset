@@ -12,6 +12,8 @@ TagManager:
   - ScoreTable
   - Tramp
   - Hole
+  - Hazard
+  - Pusher
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,9 @@ public class S_UI : MonoBehaviour
 	public GameObject volcanoLevel;
 	public GameObject spaceLevel;
 
+	public GameObject shotCount;
+	public GameObject scoreCount;
+
 	string currentLevel;
 
 	public S_Database database;
@@ -37,8 +40,7 @@ public class S_UI : MonoBehaviour
 
 	void Awake()
 	{
-		//Advertisement.Initialize ("1657903");
-
+		Advertisement.Initialize ("1657903");
 	}
 
 	// Use this for initialization
@@ -194,6 +196,7 @@ public class S_UI : MonoBehaviour
 		creditsScreen.SetActive (false);
 
 		HUD.SetActive (true);
+		ResetScore ();
 		ball.SetActive (true);
 		borders.SetActive (true);
 
@@ -215,6 +218,7 @@ public class S_UI : MonoBehaviour
 		creditsScreen.SetActive (false);
 
 		HUD.SetActive (true);
+		ResetScore ();
 		ball.SetActive (true);
 		borders.SetActive (true);
 
@@ -236,6 +240,7 @@ public class S_UI : MonoBehaviour
 		creditsScreen.SetActive (false);
 
 		HUD.SetActive (true);
+		ResetScore ();
 		ball.SetActive (true);
 		borders.SetActive (true);
 
@@ -247,6 +252,12 @@ public class S_UI : MonoBehaviour
 		gameOverPopup.SetActive (false);
 
 		currentLevel = "SpaceLevel";
+	}
+
+	void ResetScore()
+	{
+		shotCount.GetComponent<S_ShotCount> ().currentShots = 0;
+		scoreCount.GetComponent<S_ShotCount> ().currentScore = 1000;
 	}
 
 	void ShowGameOverPopup()
@@ -265,6 +276,12 @@ public class S_UI : MonoBehaviour
 	{
 		Time.timeScale = 1.0f;
 		ball.GetComponent<S_Ball> ().isDead = false;
+		ball.GetComponent<S_Ball> ().levelComplete = false;
+
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
+
+	
 
 		// if grass level
 		// reset ball and camera to original position
@@ -292,6 +309,8 @@ public class S_UI : MonoBehaviour
 			ResetBallPosition ();
 			//ResetO2Position ();
 		}
+
+
 	}
 
 	void ResetBallPosition()
@@ -311,7 +330,7 @@ public class S_UI : MonoBehaviour
 
 	public void ExitToMain()
 	{
-		Invoke ("Start", 0.1f);
+		
 	}
 
 	public void ShowLevelCompletePopup()
