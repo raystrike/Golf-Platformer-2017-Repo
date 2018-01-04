@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 70873555773140724}
   m_Layer: 0
   m_Name: Gravel Slower Modifier
-  m_TagString: Untagged
+  m_TagString: Slower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

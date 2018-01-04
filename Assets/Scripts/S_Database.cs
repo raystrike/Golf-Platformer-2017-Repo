@@ -21,14 +21,15 @@ public class S_Database : MonoBehaviour {
 
 	public S_UI UIscript;
 
-    //Loads Scoreboard
+    
+    //Loads Scoreboard (By Ray Sloan)
     public void OnLoadButtonClick()
     {
 
 		UIscript.PrintScoreboard (getAllUsers ());
     }
 
-    //Loads Scoreboard and Submits New User
+    //Loads Scoreboard and Submits New User (By Ray Sloan)
     public void OnSubmitButtonClick()
     {
         name = GameObject.Find("InputFieldName").GetComponent<UnityEngine.UI.InputField>();
@@ -37,7 +38,7 @@ public class S_Database : MonoBehaviour {
         
     }
 
-	//Loads all user scores from online database
+    //Loads all user scores from online database (By Ray Sloan)
     public string getAllUsers ()
     {
         WWW GetUsers = new WWW(ShowAllUsersURL);
@@ -56,8 +57,8 @@ public class S_Database : MonoBehaviour {
         return GetUsers.text;
     }
 
-	//Submits new user, score, shot count and level played on to online database
-	public void AddUser (string UserName, string Password, string Shots, string Level, string Score)
+    //Submits new user, score, shot count and level played on to online database (By Ray Sloan)
+    public void AddUser (string UserName, string Password, string Shots, string Level, string Score)
     {
         string hash = CreateMD5(UserName + Password + secretKey);
 
@@ -78,7 +79,7 @@ public class S_Database : MonoBehaviour {
         }
     }
 
-	//Creates hash
+    //Creates hash (By Ray Sloan)
     public static string CreateMD5(string input)
     {
         // Use input string to calculate MD5 hash

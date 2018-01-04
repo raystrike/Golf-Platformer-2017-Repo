@@ -81,17 +81,27 @@ public class S_UI : MonoBehaviour
 		database.Level = currentLevel;
 	}
 
-	//Takes string collected in "S_Database" and splits it into an array which is then printed in a grid table
-	public void PrintScoreboard (string URLOutput)
+    //Takes string collected in "S_Database" and splits it into an array which is then printed in a grid table (and destroys previous table if there was one) (By Ray Sloan)
+    public void PrintScoreboard (string URLOutput)
 	{
 		Scoreboard = GameObject.FindWithTag ("ScoreTable").gameObject;
 
 		string[] array = URLOutput.Split ('\t', '\n');
 
+        if (Scoreboard.transform.childCount > 0)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Destroy(Scoreboard.transform.GetChild(i).gameObject);
+                print("Reloading...");
+            }
+        }
+
 		for(int i = 0; i < array.Length; i++)
 		{
             GameObject _textBox = Instantiate(ScoreboardText, transform.position, transform.rotation);
-            _textBox.transform.parent = Scoreboard.transform;
+            _textBox.transform.SetParent(Scoreboard.transform, false);
+            //_textBox.transform.parent = Scoreboard.transform;
 			_textBox.GetComponent<Text> ().text = array [i];
         }
 			

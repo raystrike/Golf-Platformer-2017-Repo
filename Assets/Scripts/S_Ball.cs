@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class S_Ball : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class S_Ball : MonoBehaviour
         //rb.velocity = thrust * transform.up;
 		velocity = rb.velocity;
 
-
+        //Shows shot direction (By Ray Sloan)
         if (MidShot == false)
         {
             transform.GetChild(0).gameObject.SetActive(true);
@@ -53,7 +54,7 @@ public class S_Ball : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(false);
         }
 
-        //PC & Mobile Controls by Ray Sloan
+        //PC & Mobile Controls (By Ray Sloan)
         //PC Controls
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
@@ -71,16 +72,19 @@ public class S_Ball : MonoBehaviour
                 shotCount++;
             }
 
+
         }
         //Mobile Controls
         else if (Application.platform == RuntimePlatform.Android)
         {
+            Touch touch = Input.GetTouch(0);
+            int pointerID = touch.fingerId;
 
             //Touch Release launches ball
-            if ( MidShot == false)
+            if (Input.touchCount > 0 && MidShot == false && !EventSystem.current.IsPointerOverGameObject(pointerID))
             {
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Began)
+
+                if (touch.phase == TouchPhase.Moved)
                 {
                     //Rotate Ball in direction of touch position
                     var touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, Camera.main.nearClipPlane));
@@ -88,8 +92,6 @@ public class S_Ball : MonoBehaviour
                     transform.rotation = rot;
 
                     transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
-
-
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
@@ -102,7 +104,7 @@ public class S_Ball : MonoBehaviour
 
         }
 
-        //Club Switching By Ray Sloan
+        //Club Switching (By Ray Sloan)
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (Clubswitcher == false)//Switch to Putter
@@ -144,7 +146,7 @@ public class S_Ball : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-        //Slower By Ray Sloan
+        //Slower (By Ray Sloan)
 		if (other.tag == "Slower") 
 		{
 			rb.velocity = Vector3.zero;
