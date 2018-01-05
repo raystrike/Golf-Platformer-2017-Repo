@@ -15,6 +15,7 @@ public class S_Camera : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        //Camera tracking ball (Y-axis) (By Ray Sloan)
         transform.position = new Vector3(0, BallObject.transform.position.y, -1);
 	}
 }

@@ -16,6 +16,7 @@ public class S_RaisingMagma : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        //Move Magma Up (By Ray Sloan)
         rb.velocity = MagmaSpeed * transform.up;
     }
 }

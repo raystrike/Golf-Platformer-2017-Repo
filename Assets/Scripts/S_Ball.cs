@@ -7,17 +7,21 @@ using UnityEngine.EventSystems;
 public class S_Ball : MonoBehaviour
 {
 
-    public float thrust;
+    public float BarSpeed;
     public float fallOffMultiplier;
+    public float PowerTimer;
 	public float lastY; // james input
     public Rigidbody2D rb;
 	// public Collider2D C; // James input
 	public Vector2 velocity;
     public bool MidShot = false;
-    public bool Clubswitcher;
+    public bool ResetRotation;
+    public bool PowerTimerActive = true;
+    public bool PowerUp = true;
 	// public bool isBounced; // james input
 
-    public GameObject ClubIcon;
+    public GameObject PowerBar;
+    public GameObject PowerValueText;
     public Sprite Putter;
     public Sprite Club;
 
@@ -39,25 +43,89 @@ public class S_Ball : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        //Adds Force
-        //rb.AddForce(transform.up * thrust);
-        //rb.velocity = thrust * transform.up;
+
 		velocity = rb.velocity;
 
-        //Shows shot direction (By Ray Sloan)
+        //Shows shot direction and activate reset rotation function (By Ray Sloan)
         if (MidShot == false)
         {
             transform.GetChild(0).gameObject.SetActive(true);
+            PowerTimerActive = true;
+            if (ResetRotation == false)
+            {
+                ResetBallRotation();
+            }
         }
         else if (MidShot == true)
         {
             transform.GetChild(0).gameObject.SetActive(false);
+            PowerTimerActive = false;
         }
 
-        //PC & Mobile Controls (By Ray Sloan)
+        //Builds and decreses power of shot over time, displays on slider (By Ray Sloan)
+        if (PowerTimerActive == true)
+        {
+            PowerBar.SetActive(true);
+            if (PowerUp == true)
+            {
+                if (PowerTimer < 20)
+                {
+                    PowerTimer += Time.deltaTime * BarSpeed;
+                }
+                else
+                {
+                    PowerUp = false;
+                }
+            }
+            else
+            {
+                if (PowerTimer > 3)
+                {
+                    PowerTimer -= Time.deltaTime * BarSpeed;
+                }
+                else
+                {
+                    PowerUp = true;
+                }
+            }
+
+            PowerBar.GetComponent<Slider>().value = PowerTimer;
+            PowerValueText.GetComponent<Text>().text = PowerTimer.ToString("F0");
+        }
+        else
+        {
+            PowerBar.SetActive(false);
+        }
+
+
+        //Check if ball velocity is zero (stopped) (By James Atkins)
+        if (rb.velocity == new Vector2(0, 0))
+		{
+			MidShot = false;
+		}
+
+
+	}
+
+
+
+	void FixedUpdate ()
+	{
+		if (lastY > transform.position.y) 
+		{
+			gameObject.layer = 0;
+		}
+		else
+		{
+			lastY = transform.position.y;
+		}
+
+        //PC & Mobile Controls (Eloquently implemented by Ray Sloan)
         //PC Controls
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
+
+
             //Rotate Ball in direction of mouse pointer
             Vector3 differance = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             differance.Normalize();
@@ -67,7 +135,8 @@ public class S_Ball : MonoBehaviour
             //Mouse Click launches ball
             if (Input.GetMouseButtonDown(0) && MidShot == false)
             {
-                rb.velocity = thrust * transform.up;
+                ResetRotation = false;
+                rb.velocity = PowerTimer * transform.up;
                 MidShot = true;
                 shotCount++;
             }
@@ -88,14 +157,14 @@ public class S_Ball : MonoBehaviour
                 {
                     //Rotate Ball in direction of touch position
                     var touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, Camera.main.nearClipPlane));
-                    Quaternion rot = Quaternion.LookRotation(transform.position - touchPosition, Vector3.forward);
-                    transform.rotation = rot;
+                    touchPosition.Normalize();
+                    float rotation_zm = Mathf.Atan2(touchPosition.y, touchPosition.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(0f, 0f, rotation_zm + Offset);
 
-                    transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
-                    rb.velocity = thrust * transform.up;
+                    rb.velocity = PowerTimer * transform.up;
                     MidShot = true;
                     shotCount++;
                 }
@@ -103,46 +172,7 @@ public class S_Ball : MonoBehaviour
             }
 
         }
-
-        //Club Switching (By Ray Sloan)
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (Clubswitcher == false)//Switch to Putter
-            {
-                thrust = 5;
-                print("Putter Selected");
-                ClubIcon.GetComponent<Image>().sprite = Putter;
-                Clubswitcher = true;
-            }
-            else if (Clubswitcher == true)//Switch to Driver
-            {
-                thrust = 15;
-                print("Driver Selected");
-                ClubIcon.GetComponent<Image>().sprite = Club;
-                Clubswitcher = false;
-            }
-        }
-
-        if (rb.velocity == new Vector2(0, 0))
-		{
-			MidShot = false;
-		}
-
-		// check for collision with bottom border and if colliding then game over 
-
-	}
-
-	void FixedUpdate ()
-	{
-		if (lastY > transform.position.y) 
-		{
-			gameObject.layer = 0;
-		}
-		else
-		{
-			lastY = transform.position.y;
-		}
-	}
+    }
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
@@ -150,6 +180,8 @@ public class S_Ball : MonoBehaviour
 		if (other.tag == "Slower") 
 		{
 			rb.velocity = Vector3.zero;
+            rb.angularVelocity = 0;
+            //transform.Rotate(Vector3.up);
 		}
 
 		if (other.tag == "Magma" || other.tag == "Hazard")
@@ -181,4 +213,18 @@ public class S_Ball : MonoBehaviour
 		}
 
 	}
+
+    //Plays collision debry particles (By Ray Sloan)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        transform.GetChild(2).GetComponent<ParticleSystem>().Play();
+    }
+
+    //Resets ball rotation so shot direction always points up after each shot & Plays ball is ready to shoot particle effect (By Ray Sloan)
+    void ResetBallRotation()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+        ResetRotation = true;
+    }
 }

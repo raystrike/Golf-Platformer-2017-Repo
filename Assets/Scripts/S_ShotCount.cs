@@ -22,6 +22,7 @@ public class S_ShotCount : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        //Score calculator (By Ray Sloan)
 		currentShots = GameObject.Find ("Ball").GetComponent<S_Ball> ().shotCount;
         currentScore = 1000 - (currentShots * 35);
         if (currentScore <= 0)
