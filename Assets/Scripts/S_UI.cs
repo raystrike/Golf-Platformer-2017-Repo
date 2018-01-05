@@ -6,6 +6,11 @@ using UnityEngine.Advertisements;
 
 public class S_UI : MonoBehaviour
 {
+	/// <summary>
+	/// Unless commented otherwise,  // written by James Atkins
+	/// </summary
+
+
 	public GameObject startScreen;
 	public GameObject levelSelectScreen;
 	public GameObject leaderboardsScreen;
@@ -37,33 +42,18 @@ public class S_UI : MonoBehaviour
 
 	public GameObject magma;
 
+	bool advertShown;
 
 	void Awake()
 	{
 		Advertisement.Initialize ("1657903");
+		advertShown = false;
 	}
 
 	// Use this for initialization
 	void Start ()
 	{
-		magmaStartPosition = magma.transform.position;
-		ballStartPosition = ball.transform.position;
-
-		startScreen.SetActive (true);
-		levelSelectScreen.SetActive (false);
-		leaderboardsScreen.SetActive (false);
-		creditsScreen.SetActive (false);
-
-		HUD.SetActive (false);
-		ball.SetActive (false);
-		borders.SetActive (false);
-
-		grassLevel.SetActive (false);
-		volcanoLevel.SetActive (false);
-		spaceLevel.SetActive (false);
-
-		levelCompletePopup.SetActive (false);
-		gameOverPopup.SetActive (false);
+		ShowStartScreen ();
 	}
 	
 	// Update is called once per frame
@@ -107,6 +97,28 @@ public class S_UI : MonoBehaviour
 			_textBox.GetComponent<Text> ().text = array [i];
         }
 			
+	}
+
+	public void ShowStartScreen()
+	{
+		magmaStartPosition = magma.transform.position;
+		ballStartPosition = ball.transform.position;
+
+		startScreen.SetActive (true);
+		levelSelectScreen.SetActive (false);
+		leaderboardsScreen.SetActive (false);
+		creditsScreen.SetActive (false);
+
+		HUD.SetActive (false);
+		ball.SetActive (false);
+		borders.SetActive (false);
+
+		grassLevel.SetActive (false);
+		volcanoLevel.SetActive (false);
+		spaceLevel.SetActive (false);
+
+		levelCompletePopup.SetActive (false);
+		gameOverPopup.SetActive (false);
 	}
 
 	public void LevelSelectButton()
@@ -190,6 +202,7 @@ public class S_UI : MonoBehaviour
 
 	public void GrassLevel1Button()
 	{
+		Time.timeScale = 1.0f;
 		startScreen.SetActive (false);
 		levelSelectScreen.SetActive (false);
 		leaderboardsScreen.SetActive (false);
@@ -212,6 +225,7 @@ public class S_UI : MonoBehaviour
 
 	public void VolcanoLevel1Button()
 	{
+		Time.timeScale = 1.0f;
 		startScreen.SetActive (false);
 		levelSelectScreen.SetActive (false);
 		leaderboardsScreen.SetActive (false);
@@ -234,6 +248,7 @@ public class S_UI : MonoBehaviour
 
 	public void SpaceLevel1Button()
 	{
+		Time.timeScale = 1.0f;
 		startScreen.SetActive (false);
 		levelSelectScreen.SetActive (false);
 		leaderboardsScreen.SetActive (false);
@@ -256,7 +271,7 @@ public class S_UI : MonoBehaviour
 
 	void ResetScore()
 	{
-		shotCount.GetComponent<S_ShotCount> ().currentShots = 0;
+		shotCount.GetComponent<S_Ball> ().shotCount = 0;
 		scoreCount.GetComponent<S_ShotCount> ().currentScore = 1000;
 	}
 
@@ -281,7 +296,7 @@ public class S_UI : MonoBehaviour
 		levelCompletePopup.SetActive (false);
 		gameOverPopup.SetActive (false);
 
-	
+		advertShown = false;
 
 		// if grass level
 		// reset ball and camera to original position
@@ -309,8 +324,6 @@ public class S_UI : MonoBehaviour
 			ResetBallPosition ();
 			//ResetO2Position ();
 		}
-
-
 	}
 
 	void ResetBallPosition()
@@ -330,12 +343,19 @@ public class S_UI : MonoBehaviour
 
 	public void ExitToMain()
 	{
-		
+		ball.GetComponent<S_Ball> ().isDead = false;
+		ball.GetComponent<S_Ball> ().levelComplete = false;
+
+		ResetBallPosition ();
+		ResetMagmaPosition ();
+		ResetScore ();
+
+		ShowStartScreen ();
 	}
 
 	public void ShowLevelCompletePopup()
 	{
-		//ShowAdvert ();
+		ShowAdvert ();
 
 		Time.timeScale = 0.0f;
 
@@ -347,9 +367,10 @@ public class S_UI : MonoBehaviour
 
 	void ShowAdvert()
 	{
-		if (Advertisement.IsReady() == true)
+		if (Advertisement.IsReady() == true && advertShown == false)
 		{
 			Advertisement.Show ("video");
+			advertShown = true;
 		}
 	}
 }

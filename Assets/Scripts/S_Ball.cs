@@ -6,14 +6,17 @@ using UnityEngine.EventSystems;
 
 public class S_Ball : MonoBehaviour
 {
+	/// <summary>
+	/// Unless commented otherwise, written by Ray Sloan
+	/// </summary>
 
     public float BarSpeed;
     public float fallOffMultiplier;
     public float PowerTimer;
-	public float lastY; // james input
+	public float lastY; // james langford input
     public Rigidbody2D rb;
-	// public Collider2D C; // James input
-	public Vector2 velocity;
+	// public Collider2D C; // James langford input
+	public Vector2 velocity; // written by James Atkins
     public bool MidShot = false;
     public bool ResetRotation;
     public bool PowerTimerActive = true;
@@ -27,15 +30,15 @@ public class S_Ball : MonoBehaviour
 
     public float Offset = 90f;
 
-	public int shotCount;
+	public int shotCount; // written by James Atkins
 
-	public bool isDead = false;
-	public bool levelComplete;
+	public bool isDead = false; // written by James Atkins
+	public bool levelComplete; // written by James Atkins
 
 	// Use this for initialization
 	void Start () 
     {
-        rb = GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody2D>(); // written by James Atkins
 
 		//C = GetComponent<Collider2D>(); // James input
 	}
@@ -44,7 +47,7 @@ public class S_Ball : MonoBehaviour
 	void Update () 
     {
 
-		velocity = rb.velocity;
+		velocity = rb.velocity; // written by James Atkins
 
         //Shows shot direction and activate reset rotation function (By Ray Sloan)
         if (MidShot == false)
@@ -138,8 +141,9 @@ public class S_Ball : MonoBehaviour
                 ResetRotation = false;
                 rb.velocity = PowerTimer * transform.up;
                 MidShot = true;
-                shotCount++;
+				shotCount++; // written by James Atkins
             }
+
 
 
         }
@@ -150,13 +154,13 @@ public class S_Ball : MonoBehaviour
             int pointerID = touch.fingerId;
 
             //Touch Release launches ball
-            if (Input.touchCount > 0 && MidShot == false && !EventSystem.current.IsPointerOverGameObject(pointerID))
+            if (Input.touchCount > 0 && MidShot == false)
             {
 
                 if (touch.phase == TouchPhase.Moved)
                 {
                     //Rotate Ball in direction of touch position
-                    var touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, Camera.main.nearClipPlane));
+					var touchPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) - transform.position;
                     touchPosition.Normalize();
                     float rotation_zm = Mathf.Atan2(touchPosition.y, touchPosition.x) * Mathf.Rad2Deg;
                     transform.rotation = Quaternion.Euler(0f, 0f, rotation_zm + Offset);
@@ -164,9 +168,10 @@ public class S_Ball : MonoBehaviour
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
+					ResetRotation = false;
                     rb.velocity = PowerTimer * transform.up;
                     MidShot = true;
-                    shotCount++;
+					shotCount++; // written by James Atkins
                 }
 
             }
@@ -184,11 +189,12 @@ public class S_Ball : MonoBehaviour
             //transform.Rotate(Vector3.up);
 		}
 
-		if (other.tag == "Magma" || other.tag == "Hazard")
+		if (other.tag == "Magma" || other.tag == "Hazard") // written by James Atkins
 		{
 			isDead = true;
 		}
 
+		// by james langford
 		if (other.tag == "Tramp") // outcome of of ball colliding with "Tramp" prefab, tagged as "Tramp" 
 		{
 
@@ -202,12 +208,14 @@ public class S_Ball : MonoBehaviour
 
 			// isBounced = true; 
 		}
+
+		// by james langford
 		if (other.tag == "PortIN") 
 		{
 			
 		}
 
-		if (other.tag == "Hole")
+		if (other.tag == "Hole") // written by James Atkins
 		{
 			levelComplete = true;
 		}

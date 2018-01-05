@@ -1124,7 +1124,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 938.90234, y: -30}
+  m_AnchoredPosition: {x: 938.7184, y: -30}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &168886394
@@ -2126,7 +2126,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1125092993
+  randomSeed: -2121395142
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5815,7 +5815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 450.46237, y: -30}
+  m_AnchoredPosition: {x: 450.27835, y: -30}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &410365467
@@ -9057,7 +9057,7 @@ MonoBehaviour:
   grassLevel: {fileID: 1006827998}
   volcanoLevel: {fileID: 59204372}
   spaceLevel: {fileID: 526877939}
-  shotCount: {fileID: 683685844}
+  shotCount: {fileID: 1747663408}
   scoreCount: {fileID: 683685844}
   database: {fileID: 637192056}
   ScoreboardText: {fileID: 1250503905949956, guid: 64d0835342842ac4bb02289daf5fd35b,
@@ -9904,7 +9904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 206.24219, y: -30}
+  m_AnchoredPosition: {x: 206.05835, y: -30}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1014409917
@@ -10509,7 +10509,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 694.6824, y: -30}
+  m_AnchoredPosition: {x: 694.49835, y: -30}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1121534960
@@ -12557,7 +12557,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1209164865
+  randomSeed: -845944365
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -17510,7 +17510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6811482f79f29c44bb8291505c3be4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BarSpeed: 8
+  BarSpeed: 7
   fallOffMultiplier: 5
   PowerTimer: 0
   lastY: 0
@@ -19701,7 +19701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2118318981
 RectTransform:
   m_ObjectHideFlags: 0

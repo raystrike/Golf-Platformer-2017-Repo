@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class S_ShotCount : MonoBehaviour
 {
 
-	public int currentShots;
+	public int currentShots; // written by James Atkins
     public int currentScore;
-	public Text shotCountText;
+	public Text shotCountText; // written by James Atkins
     public Text scoreText;
 
 	public S_Database database;
@@ -23,7 +23,7 @@ public class S_ShotCount : MonoBehaviour
 	void Update ()
 	{
         //Score calculator (By Ray Sloan)
-		currentShots = GameObject.Find ("Ball").GetComponent<S_Ball> ().shotCount;
+		currentShots = GameObject.Find ("Ball").GetComponent<S_Ball> ().shotCount; // written by James Atkins
         currentScore = 1000 - (currentShots * 35);
         if (currentScore <= 0)
         {
@@ -35,6 +35,6 @@ public class S_ShotCount : MonoBehaviour
        
 
         scoreText.text = ("Score: " + currentScore);
-        shotCountText.text = ("Shots: " + currentShots);
+		shotCountText.text = ("Shots: " + currentShots); // written by James Atkins
 	}
 }
